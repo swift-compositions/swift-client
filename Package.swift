@@ -17,14 +17,24 @@ let package = Package(
             targets: ["Client"]
         )
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/swift-atoms/swift-either.git",
+            branch: "main"
+        ),
+    ],
     targets: [
         .target(
-            name: "Client"
+            name: "Client",
+            dependencies: [
+                .product(name: "Either", package: "swift-either")
+            ]
         ),
         .testTarget(
             name: "Client Tests",
             dependencies: [
-                "Client"
+                "Client",
+                .product(name: "Either", package: "swift-either"),
             ]
         ),
     ],
